@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content-header %}
+<h1>식당 목록</h1>
+{% endblock %}
+
+{% block content%}
+
+{%for post in posts%}
+
+<div class='col-md-4 bg-warning'>
+    <div>
+    <h3><a href="{% url 'reservation:detail' post.id %}">{{post.restaurant_name}}</a></h3>
+    <p>작성자: {{post.owner}} </p>
+    <p>{{post.restaurant_description}}</p>
+    <p>{{post.restaurant_callnumber}}</p>
+    <p>영업시간: {{post.reservation_time_begin}}~{{post.reservation_time_end}}</p>
+    <p>예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+    </div>
+</div>
+
+{% endfor %}
+
+<div class='text-center'> 
+ <span>
+ {% if page_obj.has_previous %}
+ <a href="?page={{page_obj.previous_page_number}}">Prev</a>
+ {% endif %}
+
+ Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}
+ {% if page_obj.has_next %}
+ <a href="?page={{page_obj.next_page_number}}">Next</a>
+ {% endif %}
+ </span>
+</div>
+
+ {% if user.is_active %}
+ <div class="text-right mr-3">
+ <a href="{%url 'reservation:add'%}" class="btn btn-primary btn-sm">
+  우리 가게 등록하기</a>
+ </div>
+ {% endif %}
+
+{% endblock %}

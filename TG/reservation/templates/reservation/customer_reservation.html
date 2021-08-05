@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content-header %}
+
+<h1> 예약 확인 및 취소</h1>
+
+{% endblock  %}
+
+{% block content %}
+
+<div>
+    <h1>고객 예약 확인</h1>
+    
+    <ul>
+    
+    {% for customer in object_list %}
+       {% if user == customer.owner %}
+        <li >
+        <a class='bg-primary' href="#">식당이름/ 식당과 연동시켜야함</a>
+        <div>
+        예약자 ID: {{customer.owner}}</br></br>
+        예약자 이름: {{customer.customer_name}}</br></br>
+        예약자 전화번호: {{customer.customer_callnumber}}</br></br>
+        예약 여부: {{customer.customer_reservation}}</br></br>
+        예약 날짜: {{customer.customer_reservation_date}}</br></br>
+        예약 시간: {{customer.customer_reservation_time}}</br></br>
+        </div>
+        </li>
+
+        {% if user == customer.owner %}
+        <div>
+        <a href="{% url 'reservation:customerupdate' customer.id %}" class="mr-3">
+        <i class="far fa-edit"></i> 예약 변경</a>
+        
+        <a href="{% url 'reservation:customerdelete' customer.id %}" class="text-danger mr-3">
+        <i class="fas fa-trash"></i> 예약 취소</a>
+        </div>
+        {% endif %}
+       {%  endif %}
+    {% endfor %}
+    
+    
+    </ul>
+
+    
+
+</div>
+
+
+{% endblock  %}

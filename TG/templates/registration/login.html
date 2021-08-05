@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content-header %}
+    <h1><i class="fas fa-sign-in-alt"></i> 로그인</h1>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <form action="." method="post" class="form col-sm-6 mx-auto">
+        
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+            <button type="submit" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> 로그인
+            </button>
+
+        </form>
+    </div>
+
+{% endblock %}

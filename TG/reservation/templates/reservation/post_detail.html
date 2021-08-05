@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content-header %}
+
+<h1>{{object.restaurant_name}}</h1>
+
+{% endblock %}
+
+{% block content%}
+<p>
+안녕하세요.
+</p>
+
+<div>
+작성자: {{post.owner}} </br></br>
+{{object.restaurant_description}}</br></br>
+{{object.restaurant_callnumber}}</br></br>
+{{object.restaurant_address}}</br></br>
+<p> 영업요일: {{object.reservation_possible_date}}</p>
+<p> 영업시간: {{object.reservation_time_begin}} ~ {{object.reservation_time_end}}</p>
+
+<p>-----------------------------------------------------------------</p>
+
+<p>ex)예약 시간 12:00 ~ 13:00//
+예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+<p>ex)예약 시간 13:00 ~ 14:00//
+예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+<p>ex)예약 시간 14:00 ~ 15:00//
+예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+<p>ex)예약 시간 15:00 ~ 16:00//
+예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+<p>ex)예약 시간 16:00 ~ 17:00//
+예약 가능 좌석: 0/{{post.reservation_seat}}</p>
+</div>
+<div>
+{% if user != post.owner and user.is_active%}
+<div class='ml-5'>
+    <a href="{%url 'reservation:customeradd' post.id%}" class='btn btn-primary btn-sm'>
+    <i class='fas fa-book'>예약하기</i>
+    </a>
+</div>
+{% endif %}
+
+<div class='ml-5'>
+    <a href='javascript:history.back()' class='btn btn-primary btn-sm'>
+    <i class='fas fa-undo'>돌아가기</i>
+    </a>
+</div>
+</div>
+{% if user == post.owner %}
+<div class="text-right">
+ <a href="{% url 'reservation:update' post.id %}" class="mr-3">
+ <i class="far fa-edit"></i> 수정</a>
+ 
+ <a href="{% url 'reservation:delete' post.id %}" class="text-danger mr-3">
+ <i class="fas fa-trash"></i> 삭제</a>
+ </div>
+{% endif %}
+
+{% endblock %}
+
+{% comment %} {% block script %}
+
+    <script>
+        function deletePost(url) {
+        if(!confirm('삭제할까요?')) {
+        return
+        }
+        
+        location= url
+        }
+    </script>
+
+{% endblock %} {% endcomment %}
