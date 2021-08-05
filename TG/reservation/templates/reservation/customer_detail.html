@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content-header %}
+ <h1>예약 세부 사항</h1>
+{% endblock %}
+
+{% block content %}
+    
+    <div>
+    <h3>{{object.customer_name}}</h3>
+    </div>
+
+    <div>
+
+    {{object.customer_callnumber}}</br></br>
+    {{object.customer_reservation}}</br></br>
+    {{object.customer_reservation_restaurant}}</br></br>
+    {{object.customer_reservation_date}}</br></br>
+    {{object.customer_reservation_time}}</br></br>
+      
+    </div>
+   
+    
+{% endblock %}
+
+{% comment %} {% block script %}
+
+    <script>
+        function deleteCustomer(url) {
+        if(!confirm('예약을 취소할까요?')) {
+        return
+        }
+        
+        location= url
+        }
+    </script>
+
+{% endblock %} {% endcomment %}
